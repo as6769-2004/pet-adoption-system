@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Center Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Welcome, Center</h1>
+  <h2>Pet Management</h2>
+  <form action="backend/manage_pets.php" method="POST">
+    <input type="text" name="name" placeholder="Pet Name" required>
+    <input type="text" name="breed" placeholder="Breed" required>
+    <input type="text" name="gender" placeholder="Gender" required>
+    <input type="number" name="age" placeholder="Age" required>
+    <input type="number" name="center_id" placeholder="Your Center ID" required>
+    <button type="submit">Add Pet</button>
+  </form>
+</body>
+</html>
