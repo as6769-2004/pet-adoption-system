@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adoption Center Signup</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h2>Center Signup</h2>
+  <form action="backend/signup_center.php" method="POST">
+    <input type="text" name="shop_no" placeholder="Shop No" required>
+    <input type="text" name="name" placeholder="Center Name" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p>Already have an account?</p>
+  <a href="center_login.html">
+    <button type="button">Login</button>
+  </a>
+</body>
+</html>
