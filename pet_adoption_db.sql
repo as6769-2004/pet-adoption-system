@@ -1,9 +1,10 @@
+-- Create Database
 CREATE DATABASE IF NOT EXISTS pet_adoption;
 USE pet_adoption;
 
 -- 1. Adoption Centers
 CREATE TABLE adopt_center (
-    centre_id INT PRIMARY KEY AUTO_INCREMENT,
+    center_id INT PRIMARY KEY AUTO_INCREMENT,
     shop_no VARCHAR(255),
     name VARCHAR(255),
     address VARCHAR(255),
@@ -14,13 +15,13 @@ CREATE TABLE adopt_center (
 -- 2. Pet List
 CREATE TABLE pet_list (
     pet_id INT PRIMARY KEY AUTO_INCREMENT,
-    centre_id INT,
+    center_id INT,
     pet_name VARCHAR(255),
     pet_gender VARCHAR(10),
     pet_breed VARCHAR(255),
     pet_age INT,
     is_adopted BOOLEAN DEFAULT 0,
-    FOREIGN KEY (centre_id) REFERENCES adopt_center(centre_id) ON DELETE CASCADE
+    FOREIGN KEY (center_id) REFERENCES adopt_center(center_id) ON DELETE CASCADE
 );
 
 -- 3. Pet Adoption
@@ -53,13 +54,13 @@ CREATE TABLE rehoming (
     FOREIGN KEY (donation_id) REFERENCES donate_fee(donation_id) ON DELETE CASCADE
 );
 
--- 6. Pet With Center (Multiple availability)
+-- 6. Pet With Center (Many-to-Many for multiple availability)
 CREATE TABLE pet_with_center (
     pet_id INT,
-    centre_id INT,
-    PRIMARY KEY (pet_id, centre_id),
+    center_id INT,
+    PRIMARY KEY (pet_id, center_id),
     FOREIGN KEY (pet_id) REFERENCES pet_list(pet_id) ON DELETE CASCADE,
-    FOREIGN KEY (centre_id) REFERENCES adopt_center(centre_id) ON DELETE CASCADE
+    FOREIGN KEY (center_id) REFERENCES adopt_center(center_id) ON DELETE CASCADE
 );
 
 -- 7. Deleted Pets Log
