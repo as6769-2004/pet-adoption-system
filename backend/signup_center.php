@@ -6,13 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $address = $_POST['address'];
     $email = $_POST['email'];
-    $password = $_POST['password']; // You can hash this
+    $password = $_POST['password'];
 
     // Optional: Hash password for security
     // $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO adopt_center (shop_no, name, address, email_id, password) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Adopt_Center (shop_no, name, address, email_id, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
     $stmt->bind_param("sssss", $shop_no, $name, $address, $email, $password);
 
     if ($stmt->execute()) {
