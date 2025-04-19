@@ -1,0 +1,270 @@
+/* General Styles for Dashboard */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.message {
+  padding: 15px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.message.error {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.message.success {
+  background-color: #27ae60;
+  color: white;
+}
+
+h2 {
+  color: #2c3e50;
+  font-size: 1.8em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-align: center; /* Center the heading */
+}
+
+/* Form Styling */
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Increased width for better flow on larger screens */
+  max-width: 600px; /* Added a maximum width */
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+form input,
+form select {
+  width: calc(100% - 22px); /* Adjust width for padding and border */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding and border are inside the element's width */
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+form button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+/* Pet Tiles Styling */
+.pet-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.pet-tile {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  min-width: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pet-tile img {
+  width: 250px;
+  margin: 25px;
+  height: 250px; /* Fixed height for consistent tile sizes */
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.pet-info {
+  padding: 10px;
+  margin-top: 25px;
+  text-align: left;
+}
+
+.pet-info h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.pet-info p {
+  margin-bottom: 5px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.adopt-btn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  width: calc(100% - 20px); /* Adjust width for margin */
+  box-sizing: border-box;
+}
+
+.adopt-btn:hover {
+  background-color: #1f8a4b;
+}
+
+.adopt-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.adoption-modal-content {
+  background-color: #fff;
+  margin: 8% auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.adoption-modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.adoption-modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.adoption-modal-content input,
+.adoption-modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.adoption-modal-content button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.adoption-modal-content button:hover {
+  background-color: #218838;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  form {
+    width: 95%;
+  }
+
+  .pet-tiles {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+}

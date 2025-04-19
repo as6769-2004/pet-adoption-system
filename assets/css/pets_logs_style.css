@@ -1,0 +1,201 @@
+/* ===== General Styles ===== */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ddd;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+  color: #2c3e50;
+}
+
+.tiles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  align-items: center;
+}
+
+/* ===== Each Pet Tile ===== */
+.pet-tile {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  min-width: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Basic Pet Info ===== */
+.pet-basic {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  min-width: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-image {
+  width: 100%;
+  max-width: 250px;
+  height: 250px;
+  object-fit: cover;
+  margin-top: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.pet-info {
+  padding: 15px;
+}
+
+.pet-info h2 {
+  margin: 5px 0;
+  font-size: 22px;
+  color: #3498db;
+}
+.pet-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.95em;
+}
+
+/* ===== Toggleable Pet Details ===== */
+.show-details {
+  display: none;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+}
+
+.pet-tile.show-tile .show-details {
+  display: block;
+}
+
+/* ===== Hidden Class (if used) ===== */
+.hidden {
+  display: none !important;
+}
+
+/*modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #000000;
+}
+
+#modalDetails img {
+    width: 250px;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    margin: 0 auto 15px;
+    display: block;
+    
+}
+
+
+/* ===== No Records Message ===== */
+.no-records {
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #999;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .pet-tile {
+    width: 90%;
+  }
+
+  .tiles-container {
+    padding: 20px 10px;
+  }
+}

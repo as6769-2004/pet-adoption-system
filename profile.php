@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->execute()) {
             echo "Profile updated successfully.";
+            header("Location:center_dashboard.php");
+            exit();
         } else {
             echo "Error updating profile: " . $stmt->error;
         }
@@ -50,6 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!-- Profile form -->
+ <html>
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
 <h2>Edit Profile</h2>
 <form action="profile.php" method="POST">
     <input type="text" name="shop_no" value="<?php echo $center['shop_no']; ?>" placeholder="Shop No" required>
@@ -59,3 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" name="password" value="<?php echo $center['password']; ?>" placeholder="Password" required>
     <button type="submit">Update Profile</button>
 </form>
+
+</body>
+</html>

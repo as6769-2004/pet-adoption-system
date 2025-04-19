@@ -29,3 +29,32 @@ window.onclick = function (event) {
   }
 };
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("adoptionModal");
+  const closeBtn = document.getElementById("closeAdoptionModalBtn");
+
+  // Function to open the modal
+  window.openAdoptionForm = function (petId, petName) {
+      document.getElementById("adoptPetName").textContent = petName;
+      document.getElementById("modalPetId").value = petId;
+      modal.style.display = "block";
+  };
+
+  // Function to close the modal
+  window.closeAdoptionForm = function () {
+      modal.style.display = "none";
+  };
+
+  // Close when X is clicked
+  closeBtn.addEventListener("click", () => {
+      closeAdoptionForm();
+  });
+
+  // Close when clicking outside modal content
+  window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+          closeAdoptionForm();
+      }
+  });
+});
