@@ -184,7 +184,21 @@ $pets_result = $conn->query($sql);
         </div>
 
     </main>
+     <!-- Profile Modal (Popup) -->
+     <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="profileContent">
+                <!-- You can dynamically load profile content here, for example: -->
+                <p><strong>Name:</strong> <?php echo $_SESSION['name']; ?></p>
+                <p><strong>Email:</strong> <?php echo $_SESSION['email']; ?></p>
+                <p><strong>Center ID:</strong> <?php echo $_SESSION['center_id']; ?></p>
+                <!-- Add more user details as needed -->
+            </div>
+        </div>
+    </div>
 
+    <script src="assets/js/profile-modal.js"></script>
     <footer>
         <p>&copy; <?php echo date("Y"); ?> Pet Adoption Center</p>
     </footer>

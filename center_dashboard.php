@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -13,18 +12,20 @@ if (!isset($_SESSION['center_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Center Dashboard</title>
     <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
+
 <body>
     <header>
         <h1>Welcome, <?php echo $_SESSION['name']; ?></h1>
         <nav>
             <ul>
-            <li><a href="center_dashboard.php">Dashboard</a></li>
+                <li><a href="center_dashboard.php">Dashboard</a></li>
                 <li><a href="javascript:void(0);" id="profileLink">Profile</a></li>
                 <li><a href="rehome.php">Rehoming</a></li>
                 <li><a href="donate.php">Donations</a></li>
@@ -34,6 +35,10 @@ if (!isset($_SESSION['center_id'])) {
             </ul>
         </nav>
     </header>
+    <div class="container">
+        <h2>Center Dashboard</h2>
+        <p>Manage your pets, adoptions, donations, and more from here.</p>
+    </div>
 
     <!-- Profile Modal (Popup) -->
     <div id="profileModal" class="modal">
@@ -51,4 +56,5 @@ if (!isset($_SESSION['center_id'])) {
 
     <script src="assets/js/profile-modal.js"></script>
 </body>
+
 </html>

@@ -103,7 +103,7 @@ if ($stmt) {
         <button type="submit" name="add_pet">Add Pet</button>
     </form>
 
-    
+
 
     <!-- Profile Modal -->
     <div id="profileModal" class="modal">
@@ -118,8 +118,9 @@ if ($stmt) {
     </div>
 
 
+
 </body>
 
-<script src="assets/js/pets.js"></script>
+<script src="assets/js/rehoming.js"></script>
 
 </html>

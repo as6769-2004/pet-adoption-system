@@ -6,38 +6,69 @@ body {
   padding: 0;
 }
 
+/* Header with background image and centered content */
 header {
-  background-color: #333;
+  background: url("../images/pets_life.jpg") no-repeat center center / cover;
   color: #fff;
-  padding: 20px;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 24px;
+/* Dark overlay for better text readability */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
+/* Header title styling */
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* Navigation styles */
 nav ul {
   list-style: none;
   padding: 0;
   margin: 20px 0 0;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 nav ul li {
-  display: inline;
-  margin: 0 15px;
+  margin: 0;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
   font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 nav ul li a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.25);
+  text-decoration: none;
 }
 
 .message {
@@ -64,56 +95,17 @@ h2 {
   text-align: center; /* Center the heading */
 }
 
-/* Form Styling */
-form {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%; /* Increased width for better flow on larger screens */
-  max-width: 600px; /* Added a maximum width */
-  margin: 20px auto;
+.container {
+  background: url("../images/dog_run.gif") no-repeat center center / cover;
+
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-form input,
-form select {
-  width: calc(100% - 22px); /* Adjust width for padding and border */
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box; /* Ensure padding and border are inside the element's width */
-}
-
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form select:focus {
-  border-color: #3498db;
-  outline: none;
-}
-
-form button[type="submit"] {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-}
-
-form button[type="submit"]:hover {
-  background-color: #2980b9;
+  justify-content: center; /* Vertical centering */
+  align-items: center; /* Horizontal centering */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Pet Tiles Styling */
@@ -262,46 +254,91 @@ form button[type="submit"]:hover {
   display: none !important;
 }
 /*modal */
+/* Modal Styles */
 .modal {
-  display: none;
+  display: none; /* Hidden by default */
   position: fixed;
-  z-index: 9999;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
   overflow: auto;
-  background-color: rgba(0,0,0,0.6);
+  padding-top: 60px;
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #fefefe;
   margin: 5% auto;
-  padding: 25px;
-  border-radius: 12px;
-  width: 90%;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
   max-width: 600px;
-}
-
-.close-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #000000;
-}
-
-#modalDetails img {
-  width: 250px;
-  max-height: 250px;
-  object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  margin-bottom: 15px;
-  margin: 0 auto 15px;
-  display: block;
-  
 }
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.modal-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+form input,
+form button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form input[type="password"] {
+  margin-bottom: 15px;
+}
+
+form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Modal Content Styles */
+#profileContent {
+  padding: 10px;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 600px) {

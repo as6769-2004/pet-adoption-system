@@ -31,7 +31,7 @@ $result = $conn->query($sql);
                 <li><a href="center_dashboard.php">Dashboard</a></li>
                 <li><a href="javascript:void(0);" id="profileLink">Profile</a></li>
                 <li><a href="rehome.php">Rehoming</a></li>
-                <li><a href="donate.php">Donations</a></li> 
+                <li><a href="donate.php">Donations</a></li>
                 <li><a href="pets.php">Pet List</a></li>
                 <li><a href="pet_logs.php">Pet Logs</a></li>
                 <li><a href="logout.php">Logout</a></li>
@@ -41,25 +41,25 @@ $result = $conn->query($sql);
 
     <main>
         <h2>Pet Logs</h2>
-
-        <div class="tiles-container">
-            <?php if ($result && $result->num_rows > 0): ?>
+        <?php if ($result && $result->num_rows > 0): ?>
+            <div class="pet-tiles">
                 <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="pet-tile" onclick='showPetDetails(<?php echo json_encode($row); ?>)'>
-                        <img src="<?php echo htmlspecialchars($row['pet_image_url']); ?>" class="pet-image" alt="Pet Image">
+                    <div class="pet-tile" onclick='showPetDetails(<?= json_encode($row) ?>)'>
+                        <img src="<?= htmlspecialchars($row['pet_image_url']) ?>" class="pet-image" alt="Pet Image">
                         <div class="pet-info">
-                            <h3><?php echo htmlspecialchars($row['pet_name']); ?></h3>
-                            <p><strong>Breed:</strong> <?php echo htmlspecialchars($row['pet_breed']); ?></p>
-                            <p><strong>Gender:</strong> <?php echo htmlspecialchars($row['pet_gender']); ?></p>
-                            <p><strong>Age:</strong> <?php echo htmlspecialchars($row['pet_age']); ?></p>
+                            <h3><?= htmlspecialchars($row['pet_name']) ?></h3>
+                            <p><strong>Breed:</strong> <?= htmlspecialchars($row['pet_breed']) ?></p>
+                            <p><strong>Gender:</strong> <?= htmlspecialchars($row['pet_gender']) ?></p>
+                            <p><strong>Age:</strong> <?= htmlspecialchars($row['pet_age']) ?></p>
                         </div>
                     </div>
                 <?php endwhile; ?>
-            <?php else: ?>
-                <div class="no-records">No logs found.</div>
-            <?php endif; ?>
-            <?php $conn->close(); ?>
-        </div>
+            </div>
+        <?php else: ?>
+            <p>No logs found.</p>
+        <?php endif; ?>
+        <?php $conn->close(); ?>
+
     </main>
 
     <!-- Pet Detail Modal -->
