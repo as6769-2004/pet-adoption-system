@@ -113,7 +113,7 @@ $pets_result = $conn->query($sql);
             <ul>
                 <li><a href="center_dashboard.php">Dashboard</a></li>
                 <li><a href="javascript:void(0);" id="profileLink">Profile</a></li>
-                <li><a href="pets.php">Rehoming</a></li>
+                <li><a href="rehome.php">Rehoming</a></li>
                 <li><a href="donate.php">Donations</a></li>
                 <li><a href="pets.php">Pet List</a></li>
                 <li><a href="pet_logs.php">Pet Logs</a></li>

@@ -1,31 +1,28 @@
-// Get modal element and close button
-var modal = document.getElementById("profileModal");
-var profileLink = document.getElementById("profileLink");
-var closeBtn = document.getElementsByClassName("close")[0];
-
-// Open the modal when clicking on Profile link
-profileLink.onclick = function () {
-  // Use AJAX to load the profile.php content into the modal
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "profile.php", true);
-  xhr.onload = function () {
-    if (xhr.status == 200) {
-      document.getElementById("profileContent").innerHTML = xhr.responseText;
-      modal.style.display = "block";
-    }
-  };
-  xhr.send();
-};
-
-// Close the modal when clicking on the close button
-closeBtn.onclick = function () {
-  modal.style.display = "none";
-};
-
-// Close the modal when clicking anywhere outside the modal content
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
+// profile-modal.js
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the modal
+  const modal = document.getElementById('profileModal');
+  
+  // Get the button that opens the modal
+  const profileLink = document.getElementById('profileLink');
+  
+  // Get the <span> element that closes the modal
+  const closeBtn = document.querySelector('.close');
+  
+  // When the user clicks on the profile link, open the modal
+  profileLink.addEventListener('click', function() {
+      modal.style.display = 'block';
+  });
+  
+  // When the user clicks on <span> (x), close the modal
+  closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+  });
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  });
+});

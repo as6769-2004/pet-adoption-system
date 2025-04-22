@@ -258,51 +258,6 @@ form button[type="submit"]:hover {
   color: #333;
 }
 
-.hidden {
-  display: none !important;
-}
-/*modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 25px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 600px;
-}
-
-.close-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #000000;
-}
-
-#modalDetails img {
-  width: 250px;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  margin: 0 auto 15px;
-  display: block;
-  
-}
-
 /* Responsive adjustments */
 @media (max-width: 600px) {
   form {
