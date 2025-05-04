@@ -11,25 +11,30 @@ $error = '';
 $success = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_pet'])) {
-    $pet_name = $_POST['pet_name'];
-    $pet_gender = $_POST['pet_gender'];
-    $pet_breed = $_POST['pet_breed'];
+    $pet_name = trim($_POST['pet_name']);
+    $pet_gender = trim($_POST['pet_gender']);
+    $pet_breed = trim($_POST['pet_breed']);
     $pet_age = intval($_POST['pet_age']);
-    $pet_image_url = $_POST['pet_image_url']; // New image URL input
+    $pet_image_url = filter_var(trim($_POST['pet_image_url']), FILTER_SANITIZE_URL); // New image URL input sanitized
 
+    // Validate input
     if (!empty($pet_name) && !empty($pet_gender) && !empty($pet_breed) && !empty($pet_age) && !empty($pet_image_url)) {
-        $sql = "INSERT INTO pet_list (center_id, pet_name, pet_gender, pet_breed, pet_age, pet_image_url) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        if ($stmt) {
-            $stmt->bind_param("isssis", $_SESSION['center_id'], $pet_name, $pet_gender, $pet_breed, $pet_age, $pet_image_url);
-            if ($stmt->execute()) {
-                $success = "Pet added successfully!";
-            } else {
-                $error = "Failed to add pet. Error: " . $stmt->error;
-            }
-            $stmt->close();
+        if (filter_var($pet_image_url, FILTER_VALIDATE_URL) === false) {
+            $error = "Invalid URL format for Pet Image URL.";
         } else {
-            $error = "Database error (Insert): " . $conn->error;
+            $sql = "INSERT INTO pet_list (center_id, pet_name, pet_gender, pet_breed, pet_age, pet_image_url) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param("isssis", $_SESSION['center_id'], $pet_name, $pet_gender, $pet_breed, $pet_age, $pet_image_url);
+                if ($stmt->execute()) {
+                    $success = "Pet added successfully!";
+                } else {
+                    $error = "Failed to add pet. Error: " . $stmt->error;
+                }
+                $stmt->close();
+            } else {
+                $error = "Database error (Insert): " . $conn->error;
+            }
         }
     } else {
         $error = "All fields are required.";
@@ -39,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_pet'])) {
 if (isset($_GET['success']) && $_GET['success'] == 1) {
     $success = "Adoption form submitted successfully!";
 }
-
 
 // Fetch pets
 $pets = null;
@@ -69,7 +73,7 @@ if ($stmt) {
 
 <body>
     <header>
-        <h1>Welcome, <?php echo $_SESSION['name']; ?></h1>
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></h1>
         <nav>
             <ul>
                 <li><a href="center_dashboard.php">Dashboard</a></li>
@@ -103,12 +107,11 @@ if ($stmt) {
         <button type="submit" name="add_pet">Add Pet</button>
     </form>
 
-
-
     <!-- Profile Modal -->
     <div id="profileModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="document.getElementById('profileModal').style.display='none'">&times;</span>
+            <span class="close-btn"
+                onclick="document.getElementById('profileModal').style.display='none'">&times;</span>
             <div id="profileContent">
                 <p><strong>Name:</strong> <?php echo htmlspecialchars($_SESSION['name']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($_SESSION['email']); ?></p>
@@ -116,8 +119,6 @@ if ($stmt) {
             </div>
         </div>
     </div>
-
-
 
 </body>
 

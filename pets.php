@@ -108,7 +108,7 @@ if ($stmt) {
             </div>
         </div>
 
-        <script src="assets/js/profile-modal.js"></script>
+        <script src="assets/js/pets.js"></script>
 </body>
 
 </html>
