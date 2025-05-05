@@ -37,7 +37,7 @@
   <div class="container">
     <h1>👋 Welcome to the Localhost Server</h1>
     <p>Click below to open the Pet Adoption System</p>
-    <a href="/pet-adoption">Go to Pet Adoption</a>
+    <a href="center_login.php">Go to Pet Adoption</a>
   </div>
 </body>
 </html>

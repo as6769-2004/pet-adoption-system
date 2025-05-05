@@ -19,7 +19,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Pet Logs</title>
-    <link rel="stylesheet" href="assets/css/pet_logs.css" />
+    <link rel="stylesheet" href="assets/css/pets.css" />
 </head>
 
 <body>

@@ -7,61 +7,34 @@ if (!isset($_SESSION['center_id'])) {
     exit();
 }
 
-$error = '';
-$success = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_pet'])) {
+$message = '';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $center_id = $_SESSION['center_id'];
     $pet_name = trim($_POST['pet_name']);
     $pet_gender = trim($_POST['pet_gender']);
     $pet_breed = trim($_POST['pet_breed']);
     $pet_age = intval($_POST['pet_age']);
-    $pet_image_url = filter_var(trim($_POST['pet_image_url']), FILTER_SANITIZE_URL); // New image URL input sanitized
+    $pet_image_url = trim($_POST['pet_image_url']);
 
-    // Validate input
-    if (!empty($pet_name) && !empty($pet_gender) && !empty($pet_breed) && !empty($pet_age) && !empty($pet_image_url)) {
-        if (filter_var($pet_image_url, FILTER_VALIDATE_URL) === false) {
-            $error = "Invalid URL format for Pet Image URL.";
+    if ($pet_name && $pet_gender && $pet_breed && $pet_age > 0 && $pet_image_url) {
+        $stmt = $conn->prepare("INSERT INTO pet_list (center_id, pet_name, pet_gender, pet_breed, pet_age, pet_image_url) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssis", $center_id, $pet_name, $pet_gender, $pet_breed, $pet_age, $pet_image_url);
+        if ($stmt->execute()) {
+            $message = "✅ Pet added successfully.";
         } else {
-            $sql = "INSERT INTO pet_list (center_id, pet_name, pet_gender, pet_breed, pet_age, pet_image_url) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            if ($stmt) {
-                $stmt->bind_param("isssis", $_SESSION['center_id'], $pet_name, $pet_gender, $pet_breed, $pet_age, $pet_image_url);
-                if ($stmt->execute()) {
-                    $success = "Pet added successfully!";
-                } else {
-                    $error = "Failed to add pet. Error: " . $stmt->error;
-                }
-                $stmt->close();
-            } else {
-                $error = "Database error (Insert): " . $conn->error;
-            }
+            $message = "❌ Error: " . $stmt->error;
         }
+        $stmt->close();
     } else {
-        $error = "All fields are required.";
+        $message = "❌ Please fill all fields correctly.";
     }
 }
 
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    $success = "Adoption form submitted successfully!";
-}
 
-// Fetch pets
-$pets = null;
-$sql = "SELECT * FROM pet_list WHERE center_id = ? AND is_adopted = 0";
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    $stmt->bind_param("i", $_SESSION['center_id']);
-    if ($stmt->execute()) {
-        $pets = $stmt->get_result();
-    } else {
-        $error = "Failed to fetch pets. Error: " . $stmt->error;
-    }
-    $stmt->close();
-} else {
-    $error = "Database error (Select): " . $conn->error;
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,25 +60,27 @@ if ($stmt) {
         </nav>
     </header>
 
-    <?php if (!empty($error)): ?>
-        <div class="message error"><?= htmlspecialchars($error) ?></div>
-    <?php elseif (!empty($success)): ?>
-        <div class="message success"><?= htmlspecialchars($success) ?></div>
+
+    <?php if ($message): ?>
+        <div class="message <?= str_starts_with($message, '❌') ? 'error' : '' ?>">
+            <?= htmlspecialchars($message) ?>
+        </div>
     <?php endif; ?>
 
-    <h2>Add New Pet</h2>
-    <form method="POST" action="pets.php">
+    <form method="POST" action="rehome.php">
+        <h2>Rehome a Pet</h2>
         <input type="text" name="pet_name" placeholder="Pet Name" required>
         <select name="pet_gender" required>
-            <option value="">Gender</option>
+            <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
-        <input type="text" name="pet_breed" placeholder="Breed" required>
-        <input type="number" name="pet_age" placeholder="Age" required>
-        <input type="text" name="pet_image_url" placeholder="Pet Image URL" required> <!-- New field for image URL -->
-        <button type="submit" name="add_pet">Add Pet</button>
+        <input type="text" name="pet_breed" placeholder="Pet Breed" required>
+        <input type="number" name="pet_age" placeholder="Pet Age" min="1" required>
+        <input type="text" name="pet_image_url" placeholder="Pet Image URL" required>
+        <button type="submit">Add Pet</button>
     </form>
+
 
     <!-- Profile Modal -->
     <div id="profileModal" class="modal">
@@ -113,15 +88,12 @@ if ($stmt) {
             <span class="close-btn"
                 onclick="document.getElementById('profileModal').style.display='none'">&times;</span>
             <div id="profileContent">
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($_SESSION['name']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($_SESSION['email']); ?></p>
-                <p><strong>Center ID:</strong> <?php echo htmlspecialchars($_SESSION['center_id']); ?></p>
+                <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['name']) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email']) ?></p>
+                <p><strong>Center ID:</strong> <?= htmlspecialchars($_SESSION['center_id']) ?></p>
             </div>
         </div>
     </div>
-
 </body>
-
-<script src="assets/js/rehoming.js"></script>
 
 </html>
