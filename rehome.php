@@ -81,7 +81,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Add Pet</button>
     </form>
 
-
     <!-- Profile Modal -->
     <div id="profileModal" class="modal">
         <div class="modal-content">
